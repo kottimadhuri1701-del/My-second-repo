@@ -1,2 +1,6 @@
 # My-second-repo
-studentl demo
+student portal demo
+basic student porpfolio
+attendence tracking system
+weekly test results
+semester result
