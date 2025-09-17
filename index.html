@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Agriculture Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      display: flex;
+      height: 100vh;
+      background-color: #f4f7f9;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background-color: #2e7d32;
+      color: white;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .sidebar a {
+      color: white;
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+
+    .sidebar a:hover {
+      background-color: #1b5e20;
+    }
+
+    /* Main Content */
+    .main {
+      flex: 1;
+      padding: 20px;
+    }
+
+    header {
+      background-color: #ffffff;
+      padding: 15px 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      font-size: 22px;
+      color: #2e7d32;
+    }
+
+    .dashboard-sections {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: #388e3c;
+    }
+
+    canvas {
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>AgriDash</h2>
+    <a href="#">Dashboard</a>
+    <a href="#">Weather</a>
+    <a href="#">Soil Data</a>
+    <a href="#">Crop Stats</a>
+    <a href="#">Settings</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <header>
+      <h1>Agriculture Monitoring Dashboard</h1>
+      <div>Welcome, Farmer</div>
+    </header>
+
+    <div class="dashboard-sections">
+      <!-- Weather Section -->
+      <div class="card">
+        <h3>Weather</h3>
+        <p>Temperature: <span id="temp">28°C</span></p>
+        <p>Humidity: <span id="humidity">60%</span></p>
+        <p>Rainfall: <span id="rain">12mm</span></p>
+      </div>
+
+      <!-- Soil Data Section -->
+      <div class="card">
+        <h3>Soil Moisture</h3>
+        <p>Moisture Level: <span id="soil-moisture">45%</span></p>
+        <p>pH Level: <span id="soil-ph">6.5</span></p>
+      </div>
+
+      <!-- Crop Stats Section -->
+      <div class="card">
+        <h3>Crop Yield (kg/ha)</h3>
+        <canvas id="cropChart" height="150"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Fake data (can be replaced with real-time API calls)
+    const temperature = 28;
+    const humidity = 60;
+    const rainfall = 12;
+    const soilMoisture = 45;
+    const soilPH = 6.5;
+
+    // Insert values into DOM
+    document.getElementById('temp').innerText = `${temperature}°C`;
+    document.getElementById('humidity').innerText = `${humidity}%`;
+    document.getElementById('rain').innerText = `${rainfall}mm`;
+    document.getElementById('soil-moisture').innerText = `${soilMoisture}%`;
+    document.getElementById('soil-ph').innerText = `${soilPH}`;
+
+    // Chart.js - Crop Yield Chart
+    const ctx = document.getElementById('cropChart').getContext('2d');
+    const cropChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Wheat', 'Rice', 'Maize', 'Barley'],
+        datasets: [{
+          label: 'Yield (kg/ha)',
+          data: [3200, 4500, 2800, 3600],
+          backgroundColor: ['#66bb6a', '#81c784', '#a5d6a7', '#c8e6c9']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
